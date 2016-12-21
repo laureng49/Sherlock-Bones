@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  breed_id: 
+  color_id: 
+  description: MyText
+  gender: MyString
+  size: MyString
+  age: MyString
+  picture: MyString
+  date: 2016-12-21
+  time: 2016-12-21 06:18:01
+  status: MyString
+  user_id: 
+  reward: 1
+  name: MyString
+
+two:
+  breed_id: 
+  color_id: 
+  description: MyText
+  gender: MyString
+  size: MyString
+  age: MyString
+  picture: MyString
+  date: 2016-12-21
+  time: 2016-12-21 06:18:01
+  status: MyString
+  user_id: 
+  reward: 1
+  name: MyString

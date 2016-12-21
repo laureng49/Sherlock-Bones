@@ -1,0 +1,25 @@
+<body>
+<img src='assets/images/giphy.gif' id='selector'/>
+<h1>Sherlock Bones</h1>
+<p>Throwing a bone to the lost dogs everywhere</p>
+
+
+<h3>Register Here</h3>
+<form method='post' action='/users'>
+  <input type ='hidden' name='authenticity_token' value="<%=form_authenticity_token%>">
+  <p>Name: <input type='text' name='name'></p>
+  <p>Email: <input type='text' name='email'></p>
+  <p>Password: <input type='text' name='password'></p>
+  <!-- <p>Location: <input type='text' name='location'></p> -->
+  <p><input type='submit' value='Register'></p>
+</form>
+
+
+<h3>Login</h3>
+<form method='post' action='/sessions'>
+  <input type ='hidden' name='authenticity_token' value="<%=form_authenticity_token%>">
+  <p>Email: <input type='text' name='email'></p>
+  <p>Password: <input type='text' name='password'></p>
+  <input type='submit' value='Login'>
+</form>
+</body>

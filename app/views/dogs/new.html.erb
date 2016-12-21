@@ -1,0 +1,68 @@
+<h3><%= @status.capitalize! %></h3>
+<form method='post' action='/dogs/create'>
+  <input type ='hidden' name='authenticity_token' value="<%=form_authenticity_token%>">
+  <input type="hidden" name="dog[status]" value="<%= @status %>">
+  <% if @status == "Lost"%>
+  <label>
+    Name:<input type='text' name='dog[name]'>
+  </label>
+</br>
+  <label>
+    Reward:<input type='text' name='dog[reward]'>
+  </label>
+  </br>
+  <% end %>
+  <label>
+    Breed:<%= select_tag("dog[breed_id]", options_from_collection_for_select(@breeds,"id", "breed", params[:breed_id].to_i)) %>
+  </label>
+  </br>
+  <label>
+    Color
+    <% @color.each do |item| %>
+    <%= item.color %>
+    <input type="radio" name="dog[color]" value="<%= item.color %>">
+    <% end %>
+  </label>
+  </br>
+  <label>
+    Size
+    <% @size.each do |item| %>
+    <%= item %>
+    <input type="radio" name="dog[size]" value="<%= item %>">
+    <% end %>
+  </label>
+  </br>
+  <label>
+    Age
+    <% @age.each do |item| %>
+    <%= item %>
+    <input type="radio" name="dog[age]" value="<%= item %>">
+    <% end %>
+  </label>
+  </br>
+  <label>
+    Gender
+    <% @gender.each do |item| %>
+    <%= item %>
+    <input type="radio" name="dog[gender]" value="<%= item %>">
+    <% end %>
+  </label>
+  </br>
+  <label>
+    Description:<textarea name="dog[description]"></textarea>
+  </label>
+  </br>
+  <label>
+    Date:<input type="date" name="dog[date]">
+  </label>
+  </br>
+  <label>
+    Time:<input type="time" name="dog[time]">
+  </label>
+  </br>
+  <label>
+    Location: <input type='text' name='dog[location]'>
+  </label>
+  <!-- <p>Location: <input type='text' name='location'></p> -->
+  <p><input type='submit' value='Submit'></p>
+</form>
