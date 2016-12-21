@@ -15,7 +15,7 @@ class DogsController < ApplicationController
     color = Color.find_by(color:form[:color])
 
     puts color
-    user = session[:user_id]
+    user = User.find(session[:user_id])
     dog = Dog.new(dog_params)
     dog.user = user
     dog.color = color
@@ -39,6 +39,15 @@ class DogsController < ApplicationController
       puts '**************' * 50
       redirect_to :back
     end
+  end
+
+  def destroy
+    id = params[:id]
+    dog = Dog.find(id)
+    temp = Success.new
+    temp.latitude = dog.latitude
+    temp.name = dog.name
+
   end
 
   private

@@ -1,2 +1,32 @@
-<h1>Lost#index</h1>
-<p>Find me in app/views/lost/index.html.erb</p>
+<% @dogs.each do |dog| %>
+<div style="width:200px; background:gray;">
+  <div>
+    <h2><%= dog.name %></h2>
+    <div style="width:150px; height:150px; background:white;">
+
+    </div>
+    <p>Lost on <%= dog.date.strftime("%m" "/" "%d" "/" "%Y")%>@<%= dog.time.strftime("%I" ":" "%M" ":" "%p") %></p>
+    <h3><%= dog.breed.breed %></h3>
+    <h4><%= dog.color.color %> | <%= dog.gender %> | <%= dog.size %> | <%= dog.age %></h4>
+    <h4>Description</h4>
+    <p><%= dog.description%></p>
+    <a href="">I found this dog</a>
+  </div>
+  <div>
+    <h2><%= dog.name %></h2>
+    <div style="width:150px; height:150px; background:white;">
+
+    </div>
+    <p>Lost on <%= dog.date.strftime("%m" "/" "%d" "/" "%Y")%>@<%= dog.time.strftime("%I" ":" "%M" ":" "%p") %></p>
+    <h4>Contact Info</h4>
+    <a href="#"><%= dog.user.email %></a>
+    <form action="/dog/location/create" method="post">
+      <label>
+        Location
+        <input type="text" name="location">
+      </label>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+</div>
+<% end %>

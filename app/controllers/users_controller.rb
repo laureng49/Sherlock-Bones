@@ -3,6 +3,7 @@ class UsersController < ApplicationController
     u=User.new(name: params[:name], email: params[:email], password: params[:password])
     if(u.valid?)
       u.save
+      session[:user_id] = u.id
       redirect_to '/main'
     else
       flash[:errors]=u.errors.full_messages

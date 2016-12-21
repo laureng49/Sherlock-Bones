@@ -5,15 +5,32 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+  });
+  </script>
 </head>
 <body>
+<% if current_user%>
+  <h1>Sherlock Bones</h1>
+  <p>Throwing a bone to the dogs everywhere</p>
+  <h2> Welcome, <%= current_user.name %>!</h2>
   <a href="/dogs/create/lost">I lost a dog</a>
   <a href="/dogs/create/found">I found a dog</a>
   <form action='/sessions/destroy' method='post'>
     <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
     <input type='hidden' name='_method' value='delete'>
     <input type='submit' value='Log Out'>
+    <div class="navBar">
+      <a href="/main">Map</a>
+      <a href="/lost/index">Lost</a>
+      <a href="/found/index">Found</a>
+      <a href="/users/show">User</a>
+    </div>
   </form>
+<% end %>
 <%= yield %>
 
 </body>
