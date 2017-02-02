@@ -1,68 +1,98 @@
-<h3><%= @status.capitalize! %></h3>
-<form method='post' action='/dogs/create'>
-  <input type ='hidden' name='authenticity_token' value="<%=form_authenticity_token%>">
-  <input type="hidden" name="dog[status]" value="<%= @status %>">
-  <% if @status == "Lost"%>
-  <label>
-    Name:<input type='text' name='dog[name]'>
-  </label>
-</br>
-  <label>
-    Reward:<input type='text' name='dog[reward]'>
-  </label>
+<div id="formpageall" data-no-turbolink>
+  <%= filepicker_js_include_tag %>
+  <h1><%= @status.capitalize! %></h1>
+  <form method='post' action='/dogs/create'>
+    <input type ='hidden' name='authenticity_token' value="<%=form_authenticity_token%>">
+    <input type="hidden" name="dog[status]" value="<%= @status %>">
+
+    <% if @status == "Lost"%>
+    <label>
+      Name:	&nbsp; &nbsp;<input type='text' name='dog[name]'>
+    </label><br>
   </br>
-  <% end %>
-  <label>
-    Breed:<%= select_tag("dog[breed_id]", options_from_collection_for_select(@breeds,"id", "breed", params[:breed_id].to_i)) %>
-  </label>
-  </br>
-  <label>
-    Color
-    <% @color.each do |item| %>
-    <%= item.color %>
-    <input type="radio" name="dog[color]" value="<%= item.color %>">
+    <label>
+      Reward:<input type='text' name='dog[reward]'>
+    </label><br>
+    </br>
     <% end %>
-  </label>
-  </br>
-  <label>
-    Size
-    <% @size.each do |item| %>
-    <%= item %>
-    <input type="radio" name="dog[size]" value="<%= item %>">
-    <% end %>
-  </label>
-  </br>
-  <label>
-    Age
-    <% @age.each do |item| %>
-    <%= item %>
-    <input type="radio" name="dog[age]" value="<%= item %>">
-    <% end %>
-  </label>
-  </br>
-  <label>
-    Gender
-    <% @gender.each do |item| %>
-    <%= item %>
-    <input type="radio" name="dog[gender]" value="<%= item %>">
-    <% end %>
-  </label>
-  </br>
-  <label>
-    Description:<textarea name="dog[description]"></textarea>
-  </label>
-  </br>
-  <label>
-    Date:<input type="date" name="dog[date]">
-  </label>
-  </br>
-  <label>
-    Time:<input type="time" name="dog[time]">
-  </label>
-  </br>
-  <label>
-    Location: <input type='text' name='dog[location]'>
-  </label>
-  <!-- <p>Location: <input type='text' name='location'></p> -->
-  <p><input type='submit' value='Submit'></p>
-</form>
+    <label>
+      Breed:	&nbsp; 	&nbsp; &nbsp;&nbsp;<%= select_tag("dog[breed_id]", options_from_collection_for_select(@breeds,"id", "breed", params[:breed_id].to_i)) %>
+    </label><br>
+    </br>
+    <label>
+      <div id="colorinput">
+      Color:
+      <input type="radio" name="dog[color]" value="Brown" >
+      <%= image_tag("Brown-01.png", :alt => "brown") %>
+      <input type="radio" name="dog[color]" value="Gray">
+        <%= image_tag("Gray-01.png", :alt => "Gray") %>
+      <input type="radio" name="dog[color]" value="Red">
+        <%= image_tag("Red-01.png", :alt => "Red") %>
+      <input type="radio" name="dog[color]" value="Tan">
+        <%= image_tag("Tan-01.png", :alt => "Tan") %>
+      <input type="radio" name="dog[color]" value="Golden">
+        <%= image_tag("Golden-01.png", :alt => "Golden") %>
+      <input type="radio" name="dog[color]" value="Cream">
+        <%= image_tag("Cream-01.png", :alt => "Cream") %>
+      <input type="radio" name="dog[color]" value="Black">
+      <%= image_tag("Black-01.png", :alt => "black") %>
+
+      </div>
+    </label><br>
+    </br>
+    <label>
+      <div id="sizeinput">
+        Size
+
+        <input type="radio" name="dog[size]" value="Small">
+        <%= image_tag("small.png", :alt => "small") %>
+        <input type="radio" name="dog[size]" value="Medium">
+        <%= image_tag("medium.png", :alt => "medium") %>
+        <input type="radio" name="dog[size]" value="Large">
+        <%= image_tag("largee.png", :alt => "largee") %>
+      </div>
+
+
+    </label><br>
+    </br>
+    <label>
+      Age:
+      <% @age.each do |item| %>
+      <input type="radio" name="dog[age]" value="<%= item %>">
+      <%= item %>
+      <% end %>
+    </label><br>
+    </br>
+    <label>
+      Gender:
+      <input type="radio" name="dog[gender]" value="Male">
+      <%= image_tag("Male.png", :alt => "male") %>
+      <input type="radio" name="dog[gender]" value="Female">
+      <%= image_tag("Female.png", :alt => "female") %>
+
+
+    </label><br>
+    </br>
+    <label>
+      Description:<textarea name="dog[description]"></textarea>
+    </label><br>
+    </br>
+    <label>
+      Date:	&nbsp;	&nbsp;	&nbsp;	&nbsp;<input type="date" name="dog[date]">
+    </label><br>
+    </br>
+    <label>
+      Time:	&nbsp;	&nbsp;	&nbsp;&nbsp;<input type="time" name="dog[time]">
+    </label><br>
+    </br>
+    <label>
+      Location:  <input type='text' name='address'>
+    </label><br>
+    <%= form_for @dog do |d| %>
+     <label><br><br>
+       <%= d.label :picture, 'Upload a Picture:' %>
+       <%= d.filepicker_field :picture, dragdrop: true %>
+   <%end%>
+    <p><input type='submit' value='Submit'></p>
+  </form>
+</div>

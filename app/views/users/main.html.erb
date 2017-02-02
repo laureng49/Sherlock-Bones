@@ -1,0 +1,15 @@
+<script src="//maps.google.com/maps/api/js?key=AIzaSyBl27ytg4R33Xf0hj25zui8OVRhz6q22A8"></script>
+<script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
+
+<div style='width: 800px;'>
+  <div id="map" style='width: 90vw; height: 80vh; margin-left:5vw; margin-right:10vw; margin-top:75px;border: 1px solid #66B9BF;'></div>
+</div>
+<script type="text/javascript">
+handler = Gmaps.build('Google');
+handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+  markers = handler.addMarkers(<%=raw @hash.to_json %>);
+  markers = handler.addMarkers(<%=raw @suc.to_json %>);
+  handler.bounds.extendWith(markers);
+  handler.fitMapToBounds();
+});
+</script>

@@ -1,2 +1,94 @@
-<h1>User#show</h1>
-<p>Find me in app/views/user/show.html.erb</p>
+<h1 style="color:black; margin-left:30px; margin-top:30px; margin-bottom:-20px; font-family: 'Carme', sans-serif;">Your Dogs</h1>
+<% @dogs.each do |dog| %>
+  <% if dog.status == "Found"%>
+    <div class="displayinlineblock">
+      <div class="polaroid">
+        <h2>Dog was found!</h2>
+        <p>Found on<%= dog.date.strftime("%m" "/" "%d" "/" "%Y")%> @ <%= dog.time.strftime("%I" ":" "%M" ":" "%p") %></p>
+        <%= filepicker_image_tag dog.picture, { w: 100, h: 100, fit: 'clip'} %>
+      </div>
+      <div class="my_popup" style="visibility:hidden;">
+
+          <div style="display: visible" class = 'info'>
+            <div id = 'dashimage'>
+              <h2>Found on <%= dog.date.strftime("%m" "/" "%d" "/" "%Y")%>@<%= dog.time.strftime("%I" ":" "%M" ":" "%p") %></h2>
+              <%= filepicker_image_tag dog.picture, { w: 100, h: 100, fit: 'clip'} %>
+            </div>
+            <div class = 'desc'>
+              <h3><%= dog.breed.breed %></h3><hr>
+              <h4><%= dog.color.color %> | <%= dog.gender %> | <%= dog.size %> | <%= dog.age %></h4><hr>
+              <h4>Description:</h4>
+              <p><%= dog.description%></p><hr>
+
+              <button type="button" class="claim_found">Reunited!</button>
+                  <div style="display:none;">
+                    <h4>Congratulations!</h4>
+                      <p>You're a hero!Thanks for reuniting two bffs! For our records, please update the location where the dog was initially lost:</p>
+                    <form action="/dogs/<%= dog.id %>/success/create" method="post">
+                      <input type ='hidden' name='authenticity_token' value="<%=form_authenticity_token%>">
+                  <label>
+                    Location Found
+                    <input type="text" name="location">
+                  </label>
+                  <input type="submit" value="Submit">
+                </form>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+<% else dog.status == "Lost" %>
+  <div class="displayinlineblock">
+    <div class="polaroid">
+      <h2><%= dog.name %></h2>
+      <p>Lost on <%= dog.date.strftime("%m" "/" "%d" "/" "%Y")%> @ <%= dog.time.strftime("%I" ":" "%M" ":" "%p") %></p>
+      <%= filepicker_image_tag dog.picture, { w: 100, h: 100, fit: 'clip'} %>
+    </div>
+    <div class="my_popup" style="visibility:hidden;">
+
+        <div style="display: visible" class = 'info'>
+          <div id = 'dashimage'>
+            <h2>Lost on <%= dog.date.strftime("%m" "/" "%d" "/" "%Y")%> @ <%= dog.time.strftime("%I" ":" "%M" ":" "%p") %></h2>
+            <%= filepicker_image_tag dog.picture, { w: 100, h: 100, fit: 'clip'} %>
+          </div>
+          <div class = 'desc'>
+            <h3><%= dog.breed.breed %></h3><hr>
+            <h4><%= dog.color.color %> | <%= dog.gender %> | <%= dog.size %> | <%= dog.age %></h4><hr>
+            <h4>Description:</h4>
+            <p><%= dog.description%></p>
+
+          <button type="button" class="claim_found">Reunited!</button>
+                    <div style="display: none" class='claim_form'>
+                      <h4>Congratulations!</h4>
+                      <p>We're so happy you and your bff were reunited! For our records, please update the location where the dog was found:</p>
+                    <form action="/dogs/<%= dog.id %>/success/create" method="post">
+                      <input type ='hidden' name='authenticity_token' value="<%=form_authenticity_token%>">
+                <label>
+                  Location Found
+                  <input type="text" name="location">
+                </label>
+                <input type="submit" value="Submit">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <% end %>
+<% end %>
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.polaroid').click( function(){
+    $(this).siblings('.my_popup').children('.info').dialog();
+    console.log('MEHHHH')
+    console.log()
+    $(this).siblings('.my_popup').children('.info').css('visibility','visible');
+
+  })
+  $('.claim_found').click(function(){
+    $(this).parents('.desc').html($('.claim_form').html())
+  })
+
+});
+</script>

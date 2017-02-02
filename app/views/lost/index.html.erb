@@ -1,32 +1,59 @@
+<h1 style="color:black; margin-left:30px; margin-top:30px; margin-bottom:-20px; font-family: 'Carme', sans-serif;;">Lost Dogs</h1>
 <% @dogs.each do |dog| %>
-<div style="width:200px; background:gray;">
-  <div>
-    <h2><%= dog.name %></h2>
-    <div style="width:150px; height:150px; background:white;">
+<div class="displayinlineblock">
+<div class="polaroid">
+  <h2><%= dog.name %></h2>
+  <p>Lost on <%= dog.date.strftime("%m" "/" "%d" "/" "%Y")%> @ <%= dog.time.strftime("%I" ":" "%M" ":" "%p") %></p>
+  <%= filepicker_image_tag dog.picture, { w: 100, h: 100, fit: 'clip'} %>
+</div>
+<div class="my_popup" style="visibility:hidden;">
 
+    <div style="display: visible" class = 'info'>
+      <div id = 'dashimage'>
+        <h2>Lost on <%= dog.date.strftime("%m" "/" "%d" "/" "%Y")%> @ <%= dog.time.strftime("%I" ":" "%M" ":" "%p") %></h2>
+        <%= filepicker_image_tag dog.picture, { w: 100, h: 100, fit: 'clip'} %>
+      </div>
+      <div class = 'desc'>
+        <h3><%= dog.breed.breed %></h3><hr>
+        <h4><%= dog.color.color %> | <%= dog.gender %> | <%= dog.size %> | <%= dog.age %></h4><hr>
+        <h4>Description:</h4>
+        <p><%= dog.description%></p><hr>
+        <button type="button" class="claim_found">I found this dog</button>
+        <div></div>
+        <div style="display:none;">
+          <h4>Contact Info</h4>
+          <%= dog.id %>
+          <a href="#"><%= dog.user.email %></a>
+          <form action="/dogs/<%= dog.id %>/location/create" method="post">
+            <input type ='hidden' name='authenticity_token' value="<%=form_authenticity_token%>">
+            <label>
+              Location Found
+              <input type="text" name="location">
+            </label>
+            <input type="submit" value="Submit">
+          </form>
+        </div>
+      </div>
     </div>
-    <p>Lost on <%= dog.date.strftime("%m" "/" "%d" "/" "%Y")%>@<%= dog.time.strftime("%I" ":" "%M" ":" "%p") %></p>
-    <h3><%= dog.breed.breed %></h3>
-    <h4><%= dog.color.color %> | <%= dog.gender %> | <%= dog.size %> | <%= dog.age %></h4>
-    <h4>Description</h4>
-    <p><%= dog.description%></p>
-    <a href="">I found this dog</a>
-  </div>
-  <div>
-    <h2><%= dog.name %></h2>
-    <div style="width:150px; height:150px; background:white;">
 
-    </div>
-    <p>Lost on <%= dog.date.strftime("%m" "/" "%d" "/" "%Y")%>@<%= dog.time.strftime("%I" ":" "%M" ":" "%p") %></p>
-    <h4>Contact Info</h4>
-    <a href="#"><%= dog.user.email %></a>
-    <form action="/dog/location/create" method="post">
-      <label>
-        Location
-        <input type="text" name="location">
-      </label>
-      <input type="submit" value="Submit">
-    </form>
-  </div>
+</div>
+
+
 </div>
 <% end %>
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.polaroid').click( function(){
+    $(this).siblings('.my_popup').children('.info').dialog();
+    console.log('MEHHHH')
+    console.log()
+    $(this).siblings('.my_popup').children('.info').css('visibility','visible');
+
+  })
+  $('.claim_found').click(function(){
+    // $(this).parents('.desc').html($('.claim_form').html())
+    $(this).siblings('div').toggle()
+  })
+
+});
+</script>

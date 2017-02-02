@@ -26,9 +26,15 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 gem 'hirb'
-gem 'rails-footnotes'
+# gem 'rails-footnotes'
 gem 'coffee-script-source', '~> 1.11.1'
 gem 'pg'
+gem 'geokit'
+gem 'geokit-rails'
+gem 'geocoder'
+gem 'gmaps4rails'
+gem 'filepicker-rails'
+gem 'popupoverlay-rails'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

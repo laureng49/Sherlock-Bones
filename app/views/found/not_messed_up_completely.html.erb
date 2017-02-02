@@ -1,0 +1,50 @@
+<% @dogs.each do |dog| %>
+<div>
+<div class="polaroid">
+  <h2>Found on <%= dog.date.strftime("%m" "/" "%d" "/" "%Y")%>@<%= dog.time.strftime("%I" ":" "%M" ":" "%p") %></h2>
+  <%= filepicker_image_tag dog.picture, { w: 100, h: 100, fit: 'clip'} %>
+</div>
+<div class="my_popup" style="visibility:hidden;">
+
+</div>
+
+  <div class="info">
+    <div style="display: visible">
+      <div id = 'dashimage'>
+        <h2>Found on <%= dog.date.strftime("%m" "/" "%d" "/" "%Y")%>@<%= dog.time.strftime("%I" ":" "%M" ":" "%p") %></h2>
+        <%= filepicker_image_tag dog.picture, { w: 100, h: 100, fit: 'clip'} %>
+      </div>
+      <h3><%= dog.breed.breed %></h3>
+      <h4><%= dog.color.color %> | <%= dog.gender %> | <%= dog.size %> | <%= dog.age %></h4>
+      <h4>Description</h4>
+      <p><%= dog.description%></p>
+      <button type="button" class="claim_found">This is my dog</button>
+    </div>
+    <div style="display: none">
+      <h4>Contact Info</h4>
+      <a href="#"><%= dog.user.email %></a>
+      <form action="/dog/location/create" method="post">
+        <label>
+          Location
+          <input type="text" name="location">
+        </label>
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+  </div>
+</div>
+<% end %>
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.polaroid').click( function(){
+    $(this).siblings().dialog();
+    console.log('MEHHHH')
+    console.log()
+    $(this).siblings().css('visibility','visible');
+
+  })
+$( ".polaroid" ).click(function() {
+
+});
+});
+</script>

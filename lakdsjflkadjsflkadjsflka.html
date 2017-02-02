@@ -1,0 +1,30 @@
+<div id="oneusersinfo">
+<% @dogs.each do |dog| %>
+<div id='dashimage'style="width:300px; background:gray;">
+
+    <h2><%= dog.name %></h2>
+    \<%= filepicker_image_tag dog.picture %>
+    <p>Lost on <%= dog.date.strftime("%m" "/" "%d" "/" "%Y")%>@<%= dog.time.strftime("%I" ":" "%M" ":" "%p") %></p>
+    <h3><%= dog.breed.breed %></h3>
+    <h4><%= dog.color.color %> | <%= dog.gender %> | <%= dog.size %> | <%= dog.age %></h4>
+    <h4>Description</h4>
+    <p><%= dog.description%></p>
+    <a href="">I found this dog</a>
+
+  <div id='popupimg'>
+    <h2><%= dog.name %></h2>
+    <%= filepicker_image_tag dog.picture %>
+    <p>Lost on <%= dog.date.strftime("%m" "/" "%d" "/" "%Y")%>@<%= dog.time.strftime("%I" ":" "%M" ":" "%p") %></p>
+    <h4>Contact Info</h4>
+    <a href="#"><%= dog.user.email %></a>
+    <form action="/dog/location/create" method="post">
+      <label>
+        Location
+        <input type="text" name="location">
+      </label>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+</div>
+<% end %>
+</div>

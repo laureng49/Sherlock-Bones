@@ -1,3 +1,28 @@
-// Place all the styles related to the Found controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.visible{
+  visibility:visible;
+}
+.hidden{
+  visibility: hidden;
+}
+
+.popup_h{
+  visibility: hidden
+}
+
+.popup_v{
+  opacity: 1;
+  visibility: visible;
+  display: inline-block;
+  outline: none;
+  // transition: all 0.3s;
+  text-align: left;
+  position: relative;
+  vertical-align: middle;
+}
+
+#fade,
+#fade_wrapper,
+#fade_background {
+  transition: all 0.3s;
+}

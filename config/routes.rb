@@ -4,22 +4,23 @@ Rails.application.routes.draw do
   delete 'sessions/destroy' => 'sessions#destroy'
 
   post 'users/' => 'users#create'
-  get 'users/show'
+  get 'users/show' => 'users#show'
   get '/main' => 'users#main'
 
-  post 'successes/create'
+  post 'dogs/:id/location/create' => 'dogs#loc'
+  post 'dogs/:id/success/create' => 'dogs#success'
 
-  get 'found/index'
+  get 'found/index' => 'found#index'
 
   get 'found/show'
 
-  post 'dogs/create'
+  post 'dogs/create' => 'dogs#create', :as => :dogs_create
 
-  get 'lost/index'
+  get 'lost/index' => 'lost#index'
 
   get 'lost/show'
 
-  get 'dogs/create/:status' => 'dogs#new'
+  get 'dogs/create/:status' => 'dogs#new', :as => :dogs
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

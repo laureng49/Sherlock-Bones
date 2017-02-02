@@ -1,0 +1,29 @@
+<% @dogs.each do |dog| %>
+<div class="displayinlineblock">
+  <div class="polaroid">
+    <% if dog.status == "Found"%>
+    <h2>Found on <%= dog.date.strftime("%m" "/" "%d" "/" "%Y")%>@<%= dog.time.strftime("%I" ":" "%M" ":" "%p") %></h2>
+    <%= filepicker_image_tag dog.picture, { w: 100, h: 100, fit: 'clip'} %>
+    <div class = 'userdesc'>
+      <h3><%= dog.breed.breed %></h3>
+      <h4><%= dog.color.color %> | <%= dog.gender %> | <%= dog.size %> | <%= dog.age %></h4>
+      <h4>Description</h4>
+      <p><%= dog.description%></p>
+    </div>
+  </div>
+</div>
+<div class="displayinlineblock">
+  <div class="polaroid">
+    <% else dog.status == "Lost" %>
+      <h2>Lost on <%= dog.date.strftime("%m" "/" "%d" "/" "%Y")%>@<%= dog.time.strftime("%I" ":" "%M" ":" "%p") %></h2>
+      <%= filepicker_image_tag dog.picture, { w: 100, h: 100, fit: 'clip'} %>
+      <div class = 'userdesc'>
+        <h3><%= dog.breed.breed %></h3>
+        <h4><%= dog.color.color %> | <%= dog.gender %> | <%= dog.size %> | <%= dog.age %></h4>
+        <h4>Description</h4>
+        <p><%= dog.description%></p>
+      </div>
+</div>
+<%end%>
+</div>
+<% end %>

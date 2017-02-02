@@ -1,25 +1,44 @@
-<body>
-<img src='assets/images/giphy.gif' id='selector'/>
-<h1>Sherlock Bones</h1>
-<p>Throwing a bone to the lost dogs everywhere</p>
+<div id="login_page_background">
+  <div id="background_color_for_loginform">
+  </div>
+    <div id="loginregister_form">
+      <h1>Sherlock Bones</h1>
+      <h5>Throwing a bone to the lost dogs everywhere</h5>
 
 
-<h3>Register Here</h3>
-<form method='post' action='/users'>
-  <input type ='hidden' name='authenticity_token' value="<%=form_authenticity_token%>">
-  <p>Name: <input type='text' name='name'></p>
-  <p>Email: <input type='text' name='email'></p>
-  <p>Password: <input type='text' name='password'></p>
-  <!-- <p>Location: <input type='text' name='location'></p> -->
-  <p><input type='submit' value='Register'></p>
-</form>
+      <div id='logregfont'>
+        <div id="logregtabs">
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#login" aria-controls="login" role="tab" data-toggle="tab">Login</a></li>
+            <li role="presentation"><a href="#register" aria-controls="register" role="tab" data-toggle="tab">Register</a></li>
+          </ul>
+        </div>
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="login">
+            <form method='post' action='/sessions'>
+              <input type ='hidden' name='authenticity_token' value="<%=form_authenticity_token%>">
+              <p>Email: </p><input type='text' name='email' class='form-control'>
+              <p>Password: </p><input type='password' name='password' class='form-control'>
+              <input type='submit' value='Login' class='form-control' id='buttontext'>
+            </form>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="register">
+            <form method='post' action='/users'>
+              <input type ='hidden' name='authenticity_token' value="<%=form_authenticity_token%>">
+              <p>Name:</p> <input type='text' name='name' class='form-control'>
+              <p>Email:</p> <input type='text' name='email' class='form-control'>
+              <p>Password:</p> <input type='password' name='password' class='form-control' >
+              <!-- <p>Location: <input type='text' name='location'></p> -->
+              <input type='submit' value='Register' class='form-control' id='buttontext'>
+          </div>
+      </div>
 
+<script>
+$('#myTabs a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+$('#myTabs a:first').tab('show') // Select first tab
+$('#myTabs a:last').tab('show') // Select last tab
 
-<h3>Login</h3>
-<form method='post' action='/sessions'>
-  <input type ='hidden' name='authenticity_token' value="<%=form_authenticity_token%>">
-  <p>Email: <input type='text' name='email'></p>
-  <p>Password: <input type='text' name='password'></p>
-  <input type='submit' value='Login'>
-</form>
-</body>
+</script>

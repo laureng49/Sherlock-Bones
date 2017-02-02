@@ -12,8 +12,23 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find(session[:user_id])
+    @dogs = Dog.where(user:@user)
   end
 
   def main
+    @locations = Location.all
+    @success = Success.all
+    puts @locations
+
+    @hash = Gmaps4rails.build_markers(@locations) do |loc, marker|
+      # marker.title loc.dog.name
+      marker.lat loc.latitude
+      marker.lng loc.longitude
+    end
+    @suc = Gmaps4rails.build_markers(@success) do |loc, marker|
+      marker.lat loc.latitude
+      marker.lng loc.longitude
+    end
   end
-end
+  end
